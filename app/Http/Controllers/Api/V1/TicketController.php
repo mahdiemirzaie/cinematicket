@@ -20,18 +20,16 @@ class TicketController extends BaseApiController
 
     public function index(Request $request): JsonResponse
     {
-        $tickets=Ticket::with(['user','section'])->get();
+        $tickets = Ticket::with(['user', 'section'])->get();
         return $this->successResponse(
             TicketResource::collection($tickets),
         );
     }
 
 
-
-
     public function store(StoreTicketRequest $request): JsonResponse
     {
-        $ticket=Ticket::create($request->validated());
+        $ticket = Ticket::create($request->validated());
         return $this->successResponse(
             TicketResource::make($ticket),
             trans('ticket.success_store'),
@@ -42,7 +40,7 @@ class TicketController extends BaseApiController
 
     public function show(Ticket $ticket)
     {
-        return TicketResource::make($ticket->load(['user','section']));
+        return TicketResource::make($ticket->load(['user', 'section']));
 
 
     }
@@ -53,17 +51,24 @@ class TicketController extends BaseApiController
         $ticket->update($request->validated());
         return $this->successResponse(
             TicketResource::make($ticket),
-            trans('ticket.success_store'),
+            trans('ticket.success_update'),
             201
         );
 
     }
-    public function destroy(Request $request,Ticket $ticket){
+
+    public function destroy(Request $request, Ticket $ticket)
+    {
         $ticket->delete();
         return $this->successResponse(
             TicketResource::make($ticket),
-            trans('ticket.success_store'),
+            trans('ticket.success_delete'),
             201
         );
     }
+    public function restore(Ticket $ticket)
+    {
+        $ticket->restore();
+    }
+
 }

@@ -58,7 +58,7 @@ class CategoryController extends BaseApiController
         $category->update($request->validated());
         return $this->successResponse(
             CategoryResource::make($category),
-            trans('category.success_store'),
+            trans('category.success_update'),
             201
         );
 
@@ -69,8 +69,12 @@ class CategoryController extends BaseApiController
         $category->delete();
         return $this->successResponse(
             CategoryResource::make($category),
-            trans('category.success_store'),
+            trans('category.success_delete'),
             201
         );
+    }
+    public function restore(Category $category)
+    {
+        $category->restore();
     }
 }

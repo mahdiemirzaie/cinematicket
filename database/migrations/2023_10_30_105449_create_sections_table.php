@@ -12,10 +12,12 @@ return new class extends Migration {
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique()->index();
             $table->time('from');
             $table->time('to');
             $table->foreignId("cinema_id")->constrained();
             $table->foreignId('movie_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

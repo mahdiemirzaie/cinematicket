@@ -19,6 +19,7 @@ class MovieResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'minute' => $this->minute,
+            'description'=>$this->description,
             'category' => $this->whenLoaded('category', function () {
                 return CategoryResource::make($this->category);
             }),

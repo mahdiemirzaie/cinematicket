@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Cinema;
+use App\Models\Comment;
 use App\Models\Movie;
 use App\Models\Ticket;
 use Illuminate\Database\Seeder;
@@ -25,9 +26,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             CategorySeeder::class,
-//            CinemaSeeder::class,
+            CinemaSeeder::class,
 //            CitySeeder::class,
-//            MovieSeeder::class,
+            MovieSeeder::class,
 //            TicketSeeder::class,
 //            SectionSeeder::class,
         ]);

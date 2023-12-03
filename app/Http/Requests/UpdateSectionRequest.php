@@ -25,7 +25,7 @@ class UpdateSectionRequest extends FormRequest
             'from' => 'time',
             'to' => 'time',
             'cinema_id' => ["required", "numeric", "exists:cinemas,id"],
-            'movie_id' => ["required", "numeric", "exists:cinemas,id"],
+            'movie_id' => ["required", "numeric", "exists:movies,id"],
         ];
     }
 }

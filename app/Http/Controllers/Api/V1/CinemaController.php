@@ -45,7 +45,7 @@ class CinemaController extends BaseApiController
 
     public function show(Cinema $cinema)
     {
-        return CinemaResource::make($cinema->load(['city','sections']));
+        return CinemaResource::make($cinema->load(['city', 'sections']));
 
 
     }
@@ -56,7 +56,7 @@ class CinemaController extends BaseApiController
         $cinema->update($request->validated());
         return $this->successResponse(
             CinemaResource::make($cinema),
-            trans('cinema.success_store'),
+            trans('cinema.success_update'),
             201
         );
 
@@ -67,9 +67,13 @@ class CinemaController extends BaseApiController
         $cinema->delete();
         return $this->successResponse(
             CinemaResource::make($cinema),
-            trans('cinema.success_store'),
+            trans('cinema.success_delete'),
             201
         );
+    }
+    public function restore(Cinema $cinema)
+    {
+        $cinema->restore();
     }
 
     public function cinemaToMovie(Request $request)

@@ -61,7 +61,7 @@ class MovieController extends BaseApiController
         $movie->update($request->validated());
         return $this->successResponse(
             MovieResource::make($movie),
-            trans('movie.success_store'),
+            trans('movie.success_update'),
             201
         );
 
@@ -72,9 +72,13 @@ class MovieController extends BaseApiController
         $movie->delete();
         return $this->successResponse(
             MovieResource::make($movie),
-            trans('movie.success_store'),
+            trans('movie.success_delete'),
             201
         );
+    }
+    public function restore(Movie $movie)
+    {
+        $movie->restore();
     }
 
     public function movieToCinema(Request $request)

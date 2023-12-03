@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique()->index();
             $table->string('name');
             $table->integer('minute');
             $table->foreignId("category_id")->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Ticket extends Model
 {
     use HasFactory;
-
+    use SoftDeletes;
+    use HasUuid;
     protected $fillable = [
+        'uuid',
         'price',
         'time',
         'user_id',

@@ -13,6 +13,9 @@ class CinemaSeeder extends Seeder
      */
     public function run(): void
     {
-        Cinema::factory()->create();
+        Cinema::factory(3)->create()->each(function (Cinema $cinema){
+            $cinema->comments()->create([
+                'content'=>fake()->text(5)]);
+        });
     }
 }

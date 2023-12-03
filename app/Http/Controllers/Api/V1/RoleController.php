@@ -17,6 +17,7 @@ class RoleController extends BaseApiController
     {
         $this->middleware('auth:sanctum');
     }
+
     public function index()
     {
         return $this->successResponse(
@@ -28,7 +29,7 @@ class RoleController extends BaseApiController
     public function store(StoreRoleRequest $request)
     {
         $role = Role::create($request->validated());
-        $role->users()->sync([1,2]);
+        $role->users()->sync([1, 2]);
         return $this->successResponse(
             RoleResource::make(),
             trans('role.success_store'),
@@ -50,7 +51,7 @@ class RoleController extends BaseApiController
         $role->update($request->validated());
         return $this->successResponse(
             RoleResource::make($role),
-            trans('role.success_store'),
+            trans('role.success_update'),
             201
         );
 
@@ -61,16 +62,20 @@ class RoleController extends BaseApiController
         $role->delete();
         return $this->successResponse(
             RoleResource::make($role),
-            trans('role.success_store'),
+            trans('role.success_delete'),
             201
         );
+    }
+    public function restore(Role $role)
+    {
+        $role->restore();
     }
 
     public function roleToUser(Request $request)
     {
-        $role_id=$request->input('role_id');
-        $role=Role::find($role_id);
-        $users=$request->input('users');
+        $role_id = $request->input('role_id');
+        $role = Role::find($role_id);
+        $users = $request->input('users');
         $role->users()->attach($users);
 //       $role->users()->detach($users);
 //       $role->users()->sync($users);

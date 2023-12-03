@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique()->index();
             $table->integer('price');
             $table->time('time');
             $table->foreignId("user_id")->constrained();
             $table->foreignId("section_id")->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -63,7 +63,7 @@ class CityController extends BaseApiController
         $city->update($request->validated());
         return $this->successResponse(
             CityResource::make($city),
-            trans('city.success_store'),
+            trans('city.success_update'),
             201
         );
 
@@ -75,8 +75,12 @@ class CityController extends BaseApiController
         $city->delete();
         return $this->successResponse(
             CityResource::make($city),
-            trans('city.success_store'),
+            trans('city.success_delete'),
             201
         );
+    }
+    public function restore(City $city)
+    {
+        $city->restore();
     }
 }

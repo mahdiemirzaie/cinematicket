@@ -24,6 +24,7 @@ class StoreMovieRequest extends FormRequest
         return [
             'name'=>'required|string|min:2|max:50',
             'minute'=>'integer',
+            'description'=>'text',
             'category_id'=>'integer|required',
         ];
     }

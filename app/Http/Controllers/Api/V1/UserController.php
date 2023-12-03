@@ -31,7 +31,7 @@ class UserController extends BaseApiController
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->validated());
-        $user->roles()->sync([1,2]);
+        $user->roles()->sync([1, 2]);
         return $this->successResponse(
             UserResource::make($user)($user->load('roles')),
             trans('user.success_store'),
@@ -53,7 +53,7 @@ class UserController extends BaseApiController
         $user->update($request->validated());
         return $this->successResponse(
             UserResource::make($user),
-            trans('user.success_store'),
+            trans('user.success_update'),
             201
         );
 
@@ -63,11 +63,17 @@ class UserController extends BaseApiController
     {
         $user->delete();
         return $this->successResponse(
-            UserResource::make($user),
-            trans('user.success_store'),
+            trans('user.success_delete'),
             201
         );
+
     }
+
+    public function restore(User $user)
+    {
+        $user->restore();
+    }
+
 
     public function userToRole(Request $request)
     {

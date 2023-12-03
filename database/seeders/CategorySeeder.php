@@ -30,11 +30,11 @@ class CategorySeeder extends Seeder
                 'parent_id' => $category1->id,
             ]);
 
-            $movies = Movie::factory(5)->create([
+            $movies = Movie::factory(2)->create([
                 'category_id' => $cate1->id,
             ]);
 
-            $cinemas = Cinema::factory(6)->create([
+            $cinemas = Cinema::factory(2)->create([
                 'name'=>'name'
             ]);
             $sections = [];

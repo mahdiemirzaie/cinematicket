@@ -19,7 +19,7 @@ class SectionController extends BaseApiController
 
     public function index(Request $request): JsonResponse
     {
-        $section =Section::with(["cinema","tickets","movie"])->get();
+        $section = Section::with(["cinema", "tickets", "movie"])->get();
         return $this->successResponse(
             SectionResource::collection($section),
         );
@@ -39,7 +39,7 @@ class SectionController extends BaseApiController
 
     public function show(Section $section)
     {
-        return SectionResource::make($section->load(['cinema','tickets','movie']));
+        return SectionResource::make($section->load(['cinema', 'tickets', 'movie']));
 
 
     }
@@ -50,7 +50,7 @@ class SectionController extends BaseApiController
         $section->update($request->validated());
         return $this->successResponse(
             SectionResource::make($section),
-            trans('salon.success_store'),
+            trans('salon.success_update'),
             201
         );
 
@@ -61,9 +61,13 @@ class SectionController extends BaseApiController
         $section->delete();
         return $this->successResponse(
             SectionResource::make($section),
-            trans('salon.success_store'),
+            trans('salon.success_delete'),
             201
         );
+    }
+    public function restore(Section $section)
+    {
+        $section->restore();
     }
 
     public function sectionToMovie(Request $request)
@@ -76,4 +80,3 @@ class SectionController extends BaseApiController
 //        $section->movies()->sync($movies);
     }
 }
-

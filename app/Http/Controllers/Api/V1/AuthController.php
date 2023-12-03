@@ -16,9 +16,9 @@ class AuthController extends BaseApiController
 
     public function register(RegisterRequest $request)
     {
-        $users = User::create($request->validated());
+        $user = User::create($request->validated());
         return $this->successResponse(
-            UserResource::make($users));
+            UserResource::make($user));
 
     }
 
@@ -42,8 +42,46 @@ class AuthController extends BaseApiController
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        if($request->user()->currentAccessToken()->delete())
+        {
+            return $this->successResponse(
+                "True",
+                "user.success_logout",
+            );
+        } else {
+            return $this->errorResponse(
+                "False",
+                "user.failed_logout",
+            );
+        }
 
-        return $this->successResponse([], 'User logged out successfully');
     }
+
 }
+
+
+
+//$credentials = $request->only('email', 'password');
+//        if (Auth::attempt($credentials)) {
+//auth()->user()->tokens()->delete();
+//return 'logout';
+//        } else {
+//            return 'Invalid credentials';
+//        }
+
+
+
+
+
+//auth()->user()->tokens()->delete();
+//return 'logout';
+
+
+
+
+//if (auth()->check()) {
+//    Auth::user()?->tokens()->delete();
+//    return $this->successResponse('', 'you have successfully logged out ');
+//}
+//
+//return $this->errorResponse('No authenticated user detected', 401);
